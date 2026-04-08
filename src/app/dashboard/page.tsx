@@ -22,7 +22,7 @@ export default function HomeDashboard() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/60 backdrop-blur-md pb-4 border-b border-slate-200/60 z-10 w-full mb-2">
                 <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                        Dashboard
+                        Panel de Control
                     </h2>
                     <p className="mt-1 text-sm text-slate-500">
                         Resumen general del centro de ayuda
@@ -58,10 +58,10 @@ export default function HomeDashboard() {
             {/* KPI Stats Map */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { label: "Total Active Tickets", value: "32", icon: FileText, change: "+12%", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
-                    { label: "Resolved Today", value: "14", icon: CheckCircle2, change: "+4%", color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
-                    { label: "Avg Resolution Time", value: "2.4h", icon: Clock, change: "-10%", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-100" },
-                    { label: "Critical Issues", value: "3", icon: AlertCircle, change: "Requires attention", color: "text-rose-600", bg: "bg-rose-50", border: "border-rose-100" },
+                    { label: "Tickets Activos Totales", value: "32", icon: FileText, change: "+12%", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
+                    { label: "Resueltos Hoy", value: "14", icon: CheckCircle2, change: "+4%", color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
+                    { label: "Tiempo Prom. Resolución", value: "2.4h", icon: Clock, change: "-10%", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-100" },
+                    { label: "Problemas Críticos", value: "3", icon: AlertCircle, change: "Requiere atención", color: "text-rose-600", bg: "bg-rose-50", border: "border-rose-100" },
                 ].map((stat, idx) => (
                     <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 hover:shadow-md transition-shadow relative overflow-hidden group">
                         <div className={`absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 rounded-full ${stat.bg} opacity-50 group-hover:scale-150 transition-transform duration-500 ease-in-out`}></div>
@@ -93,7 +93,7 @@ export default function HomeDashboard() {
                         <div>
                             <h3 className="font-semibold text-slate-800 flex items-center">
                                 <Activity className="h-4 w-4 mr-2 text-indigo-500" />
-                                Ticket Volume (This Week)
+                                Volumen de Tickets (Esta Semana)
                             </h3>
                         </div>
                     </div>
@@ -117,8 +117,8 @@ export default function HomeDashboard() {
                                     contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                                     itemStyle={{ fontSize: '13px', fontWeight: 500 }}
                                 />
-                                <Area type="monotone" dataKey="open" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorOpen)" name="Opened" />
-                                <Area type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorResolved)" name="Resolved" />
+                                <Area type="monotone" dataKey="open" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorOpen)" name="Abiertos" />
+                                <Area type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorResolved)" name="Resueltos" />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -126,13 +126,13 @@ export default function HomeDashboard() {
 
                 {/* Quick Links / Recent Activity */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60">
-                    <h3 className="font-semibold text-slate-800 mb-6">Recent Activity</h3>
+                    <h3 className="font-semibold text-slate-800 mb-6">Actividad Reciente</h3>
                     <div className="space-y-6">
                         {[
-                            { title: "VPN Connection Issue", time: "10 mins ago", status: "Critical", user: "Alice S." },
-                            { title: "Password Reset Request", time: "1 hr ago", status: "Resolved", user: "Bob T." },
-                            { title: "New Monitor Request", time: "2 hrs ago", status: "Open", user: "Charlie D." },
-                            { title: "Software Installation", time: "5 hrs ago", status: "In Progress", user: "Dana R." },
+                            { title: "Problema conexión VPN", time: "hace 10 min", status: "Critical", user: "Alice S." },
+                            { title: "Solicitud restablecer contraseña", time: "hace 1 h", status: "Resolved", user: "Bob T." },
+                            { title: "Solicitud de monitor nuevo", time: "hace 2 h", status: "Open", user: "Charlie D." },
+                            { title: "Instalación de software", time: "hace 5 h", status: "In Progress", user: "Dana R." },
                         ].map((item, i) => (
                             <div key={i} className="flex gap-4 items-start relative pb-6 last:pb-0">
                                 {i !== 3 && <div className="absolute left-2 top-8 bottom-0 w-px bg-slate-200 -ml-px"></div>}
@@ -154,7 +154,7 @@ export default function HomeDashboard() {
                     </div>
                     <div className="mt-6 pt-6 border-t border-slate-100">
                         <Link href="/dashboard/tickets" className="text-sm font-medium text-indigo-600 hover:text-indigo-700 hover:underline">
-                            View all tickets &rarr;
+                            Ver todos los tickets &rarr;
                         </Link>
                     </div>
                 </div>

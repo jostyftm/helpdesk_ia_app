@@ -655,30 +655,30 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                                     <div className="px-4 py-2 border-b border-slate-200/60 bg-white flex flex-wrap items-center gap-1">
                                         <div className="flex items-center gap-1 pr-3 border-r border-slate-200">
                                             <select className="text-sm font-medium border-none bg-transparent text-slate-700 focus:ring-0 cursor-pointer hover:bg-slate-50 rounded-md py-1 px-2">
-                                                <option>Normal text</option>
-                                                <option>Heading 1</option>
-                                                <option>Heading 2</option>
-                                                <option>Heading 3</option>
+                                                <option>Texto normal</option>
+                                                <option>Título 1</option>
+                                                <option>Título 2</option>
+                                                <option>Título 3</option>
                                             </select>
                                         </div>
                                         <div className="flex items-center gap-1 px-3 border-r border-slate-200">
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Bold"><Bold className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Italic"><Italic className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Underline"><Underline className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Negrita"><Bold className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Cursiva"><Italic className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Subrayado"><Underline className="w-4 h-4" /></button>
                                         </div>
                                         <div className="flex items-center gap-1 px-3 border-r border-slate-200 hidden sm:flex">
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Align Left"><AlignLeft className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-md transition-colors" title="Align Center"><AlignCenter className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-md transition-colors" title="Align Right"><AlignRight className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Alinear a la izquierda"><AlignLeft className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-md transition-colors" title="Alinear al centro"><AlignCenter className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-400 hover:bg-slate-100 rounded-md transition-colors" title="Alinear a la derecha"><AlignRight className="w-4 h-4" /></button>
                                         </div>
                                         <div className="flex items-center gap-1 px-3 border-r border-slate-200">
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Bullet List"><List className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Numbered List"><ListOrdered className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Lista de viñetas"><List className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Lista numerada"><ListOrdered className="w-4 h-4" /></button>
                                         </div>
                                         <div className="flex items-center gap-1 pl-3">
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Insert Link"><LinkIcon className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Insert Image"><ImageIcon className="w-4 h-4" /></button>
-                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Code Block"><Code className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Insertar enlace"><LinkIcon className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Insertar imagen"><ImageIcon className="w-4 h-4" /></button>
+                                            <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded-md transition-colors" title="Bloque de código"><Code className="w-4 h-4" /></button>
                                         </div>
                                     </div>
 

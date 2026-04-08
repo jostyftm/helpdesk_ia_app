@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useLogin } from "./hooks/useLogin";
 
 export default function LoginPage() {
+    const { form, isLoading, globalError, onSubmit } = useLogin();
+    const { register, formState: { errors } } = form;
+
     return (
         <div className="min-h-screen bg-white flex">
             {/* Left side - Login Form */}
@@ -22,7 +28,12 @@ export default function LoginPage() {
                     </div>
 
                     <div className="mt-8">
-                        <form action="#" method="POST" className="space-y-6">
+                        <form onSubmit={onSubmit} className="space-y-6">
+                            {globalError && (
+                                <div className="bg-red-50 p-3 rounded-md">
+                                    <p className="text-sm text-red-600">{globalError}</p>
+                                </div>
+                            )}
                             <div>
                                 <label
                                     htmlFor="email"
@@ -33,14 +44,16 @@ export default function LoginPage() {
                                 <div className="mt-1">
                                     <input
                                         id="email"
-                                        name="email"
                                         type="email"
                                         autoComplete="email"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all duration-200"
+                                        {...register("email")}
+                                        className={`appearance-none block w-full px-3 py-2.5 border ${errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'} rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-all duration-200`}
                                         placeholder="admin@helpdesk.com"
                                     />
                                 </div>
+                                {errors.email && (
+                                    <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+                                )}
                             </div>
 
                             <div>
@@ -53,14 +66,16 @@ export default function LoginPage() {
                                 <div className="mt-1">
                                     <input
                                         id="password"
-                                        name="password"
                                         type="password"
                                         autoComplete="current-password"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all duration-200"
+                                        {...register("password")}
+                                        className={`appearance-none block w-full px-3 py-2.5 border ${errors.password ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'} rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-all duration-200`}
                                         placeholder="••••••••"
                                     />
                                 </div>
+                                {errors.password && (
+                                    <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
+                                )}
                             </div>
 
                             <div className="flex items-center justify-between">
@@ -90,12 +105,13 @@ export default function LoginPage() {
                             </div>
 
                             <div>
-                                <Link
-                                    href="/dashboard/tickets"
-                                    className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5"
+                                <button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    Sign in
-                                </Link>
+                                    {isLoading ? "Signing in..." : "Sign in"}
+                                </button>
                             </div>
                         </form>
                     </div>

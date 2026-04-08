@@ -11,11 +11,20 @@ export function Header({ isCollapsed, setIsCollapsed }: { isCollapsed: boolean, 
     const pathnames = pathname.split('/').filter(x => x);
     const breadcrumbs = pathnames.map((segment, index) => {
         const href = `/${pathnames.slice(0, index + 1).join('/')}`;
-        // capitalize first letter and format
-        const label = segment.charAt(0).toUpperCase() + segment.slice(1);
+
+        const translations: Record<string, string> = {
+            'dashboard': 'Panel',
+            'tickets': 'Casos',
+            'chat': 'Chat',
+            'users': 'Usuarios',
+            'roles': 'Roles',
+            'reports': 'Reportes',
+            'settings': 'Configuración'
+        };
+        const label = translations[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
         const isLast = index === pathnames.length - 1;
 
-        return { href, label, isLast };
+        return { href, label, isLast, segment };
     });
 
     return (
@@ -43,7 +52,7 @@ export function Header({ isCollapsed, setIsCollapsed }: { isCollapsed: boolean, 
                         </li>
                         {breadcrumbs.length > 0 && breadcrumbs.map((crumb, idx) => (
                             // Skip the first "Dashboard" crumb if it duplicates the home icon logic
-                            crumb.label.toLowerCase() !== 'dashboard' && (
+                            crumb.segment !== 'dashboard' && (
                                 <li key={idx} className="flex items-center gap-2">
                                     <ChevronRight className="h-4 w-4 text-slate-300" />
                                     {crumb.isLast ? (

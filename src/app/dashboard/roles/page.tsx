@@ -50,16 +50,16 @@ export default function RolesPage() {
             <div className="flex justify-between items-center mb-6 shrink-0 bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-sm">
                 <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                        Roles & Permissions
+                        Roles y Permisos
                     </h2>
-                    <p className="mt-1 text-sm text-slate-500">Configure access levels and permissions for your users.</p>
+                    <p className="mt-1 text-sm text-slate-500">Configura niveles de acceso y permisos para tus usuarios.</p>
                 </div>
                 <button
                     onClick={() => handleOpenForm()}
                     className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all hover:shadow-lg hover:-translate-y-0.5"
                 >
                     <Plus className="h-4 w-4 mr-2" />
-                    Create Role
+                    Crear Rol
                 </button>
             </div>
 
@@ -83,7 +83,7 @@ export default function RolesPage() {
                                 <h3 className="text-lg font-bold text-slate-800">{role.name}</h3>
                                 <div className="flex items-center text-xs font-medium text-slate-500 mt-1">
                                     <Users className="h-3 w-3 mr-1" />
-                                    {role.userCount} assigned users
+                                    {role.userCount} usuarios asignados
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@ export default function RolesPage() {
                             onClick={() => handleOpenPermissions(role)}
                             className="w-full py-2.5 mt-auto rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-indigo-700 hover:border-indigo-200 transition-colors"
                         >
-                            Manage Permissions
+                            Gestionar Permisos
                         </button>
                     </div>
                 ))}
@@ -106,11 +106,11 @@ export default function RolesPage() {
             <Modal
                 isOpen={isFormOpen}
                 onClose={() => setIsFormOpen(false)}
-                title={activeRole ? "Edit Role" : "Create New Role"}
+                title={activeRole ? "Editar Rol" : "Crear Nuevo Rol"}
             >
                 <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); setIsFormOpen(false); }}>
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1.5">Role Name</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre del Rol</label>
                         <input
                             type="text"
                             required
@@ -119,7 +119,7 @@ export default function RolesPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1.5">Description</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-1.5">Descripción</label>
                         <textarea
                             required
                             rows={3}
@@ -129,10 +129,10 @@ export default function RolesPage() {
                     </div>
                     <div className="flex justify-end gap-3 pt-6 border-t border-slate-100 mt-6">
                         <button type="button" onClick={() => setIsFormOpen(false)} className="rounded-xl border border-slate-300 bg-white py-2.5 px-6 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
-                            Cancel
+                            Cancelar
                         </button>
                         <button type="submit" className="inline-flex justify-center rounded-xl bg-indigo-600 py-2.5 px-6 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 transition-all">
-                            Save Role
+                            Guardar Rol
                         </button>
                     </div>
                 </form>
@@ -142,13 +142,13 @@ export default function RolesPage() {
             <Modal
                 isOpen={isPermissionsOpen}
                 onClose={() => setIsPermissionsOpen(false)}
-                title={`Permissions: ${activeRole?.name}`}
+                title={`Permisos: ${activeRole?.name}`}
                 maxWidth="max-w-2xl"
             >
                 <div className="space-y-6">
                     <p className="text-sm text-slate-500 bg-indigo-50 p-4 rounded-xl border border-indigo-100 flex items-start">
                         <Shield className="h-5 w-5 text-indigo-600 mr-3 shrink-0" />
-                        Check the boxes below to grant capabilities to this role. Users assigned to this role will inherit all selected permissions automatically.
+                        Marca las casillas a continuación para otorgar capacidades a este rol. Los usuarios asignados a este rol heredarán todos los permisos seleccionados automáticamente.
                     </p>
 
                     <div className="space-y-6 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
@@ -179,11 +179,11 @@ export default function RolesPage() {
 
                     <div className="flex justify-end gap-3 pt-6 border-t border-slate-100">
                         <button onClick={() => setIsPermissionsOpen(false)} className="rounded-xl border border-slate-300 bg-white py-2.5 px-6 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
-                            Cancel
+                            Cancelar
                         </button>
                         <button onClick={() => setIsPermissionsOpen(false)} className="inline-flex items-center justify-center rounded-xl bg-indigo-600 py-2.5 px-6 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 transition-all">
                             <Save className="h-4 w-4 mr-2" />
-                            Update Permissions
+                            Actualizar Permisos
                         </button>
                     </div>
                 </div>

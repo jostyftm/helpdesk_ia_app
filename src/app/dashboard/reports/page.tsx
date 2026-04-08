@@ -46,22 +46,22 @@ export default function ReportsPage() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-sm">
                 <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                        Reporting & Analytics
+                        Reportes y Analíticas
                     </h2>
-                    <p className="mt-1 text-sm text-slate-500">Comprehensive overview of helpdesk performance metrics.</p>
+                    <p className="mt-1 text-sm text-slate-500">Descripción general de las métricas de rendimiento.</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <button className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
                         <Calendar className="h-4 w-4 mr-2 text-slate-400" />
-                        Last 30 Days
+                        Últimos 30 Días
                     </button>
                     <button className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition-colors">
                         <Filter className="h-4 w-4 mr-2 text-slate-400" />
-                        Filters
+                        Filtros
                     </button>
                     <button className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-all hover:shadow-md">
                         <Download className="h-4 w-4 mr-2" />
-                        Export
+                        Exportar
                     </button>
                 </div>
             </div>
@@ -75,7 +75,7 @@ export default function ReportsPage() {
                             <path d="M0 100C0 44.7715 44.7715 0 100 0V100H0Z" fill="#6366f1" />
                         </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">Ticket Volume Trend</h3>
+                    <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">Tendencia del Volumen de Tickets</h3>
                     <div className="h-80 relative z-10 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={volumeData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -97,8 +97,8 @@ export default function ReportsPage() {
                                     itemStyle={{ fontWeight: 600 }}
                                 />
                                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
-                                <Area type="monotone" dataKey="created" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorCreated)" name="Tickets Created" />
-                                <Area type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorResolved)" name="Tickets Resolved" />
+                                <Area type="monotone" dataKey="created" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorCreated)" name="Tickets Creados" />
+                                <Area type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorResolved)" name="Tickets Resueltos" />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -106,7 +106,7 @@ export default function ReportsPage() {
 
                 {/* Channels */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 flex flex-col">
-                    <h3 className="text-lg font-bold text-slate-800 mb-6">Tickets by Channel</h3>
+                    <h3 className="text-lg font-bold text-slate-800 mb-6">Tickets por Canal</h3>
                     <div className="h-64 flex-1">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
@@ -136,7 +136,7 @@ export default function ReportsPage() {
                 {/* SLA & Rating */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 flex flex-col">
                     <div className="flex justify-between items-center mb-6">
-                        <h3 className="text-lg font-bold text-slate-800">Quality of Service</h3>
+                        <h3 className="text-lg font-bold text-slate-800">Calidad de Servicio</h3>
                         <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-md border border-emerald-100">+0.4 CSAT</span>
                     </div>
                     <div className="h-64 flex-1">
@@ -150,8 +150,8 @@ export default function ReportsPage() {
                                     contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
                                 />
                                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
-                                <Line yAxisId="left" type="monotone" dataKey="satisfaction" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} name="CSAT (Out of 5)" />
-                                <Line yAxisId="right" type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} name="Avg Response (Hours)" />
+                                <Line yAxisId="left" type="monotone" dataKey="satisfaction" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} name="Satisfacción (Sobre 5)" />
+                                <Line yAxisId="right" type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} name="Tiempo Promedio (Horas)" />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -159,7 +159,7 @@ export default function ReportsPage() {
 
                 {/* Agent Performance */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 lg:col-span-2">
-                    <h3 className="text-lg font-bold text-slate-800 mb-6">Agent Performance Snapshot</h3>
+                    <h3 className="text-lg font-bold text-slate-800 mb-6">Desempeño de los Agentes</h3>
                     <div className="h-72">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={agentPerformance} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} layout="vertical">
@@ -168,7 +168,7 @@ export default function ReportsPage() {
                                 <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 12, fontWeight: 600 }} width={80} />
                                 <Tooltip cursor={{ fill: '#f8fafc' }} contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }} />
                                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
-                                <Bar dataKey="tickets" fill="#6366f1" radius={[0, 4, 4, 0]} barSize={20} name="Tickets Closed" />
+                                <Bar dataKey="tickets" fill="#6366f1" radius={[0, 4, 4, 0]} barSize={20} name="Tickets Cerrados" />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

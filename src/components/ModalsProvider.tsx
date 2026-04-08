@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState } from "react";
 import { X, CheckCircle, AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { logout } from "@/app/login/services/auth.service";
 
 type ModalsContextType = {
     openChangePasswordModal: () => void;
@@ -150,6 +152,24 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
 }
 
 function LogoutModal({ onClose }: { onClose: () => void }) {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleLogout = async () => {
+        setIsLoading(true);
+        try {
+            await logout();
+        } catch (error) {
+            console.error("Error logging out", error);
+        } finally {
+            localStorage.removeItem('access_token');
+            // document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            setIsLoading(false);
+            onClose();
+            router.push('/login');
+        }
+    };
+
     return (
         <ModalWrapper onClose={onClose} title="Cerrar Sesión">
             <div className="text-center py-2 space-y-4">
@@ -159,12 +179,12 @@ function LogoutModal({ onClose }: { onClose: () => void }) {
                 <h4 className="text-lg font-bold text-slate-800">¿Estás seguro?</h4>
                 <p className="text-slate-600 text-sm">Se cerrará tu sesión actual y tendrás que volver a ingresar tus credenciales para acceder al sistema.</p>
                 <div className="flex gap-3 pt-6">
-                    <button onClick={onClose} className="flex-1 py-2.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium transition-colors">
+                    <button onClick={onClose} disabled={isLoading} className="flex-1 py-2.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">
                         Cancelar
                     </button>
-                    <a href="/login" className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-semibold transition-colors flex items-center justify-center">
-                        Sí, salir
-                    </a>
+                    <button onClick={handleLogout} disabled={isLoading} className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-semibold transition-colors flex items-center justify-center disabled:opacity-50">
+                        {isLoading ? "Saliendo..." : "Sí, salir"}
+                    </button>
                 </div>
             </div>
         </ModalWrapper>

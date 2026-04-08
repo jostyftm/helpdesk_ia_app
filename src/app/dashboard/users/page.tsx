@@ -27,16 +27,16 @@ export default function UsersPage() {
             <div className="flex justify-between items-center mb-6 shrink-0 bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-sm">
                 <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                        Users & Agents
+                        Usuarios y Agentes
                     </h2>
-                    <p className="mt-1 text-sm text-slate-500">Manage platform access, roles and preferences.</p>
+                    <p className="mt-1 text-sm text-slate-500">Gestiona accesos a la plataforma, roles y preferencias.</p>
                 </div>
                 <button
                     onClick={handleCreateNew}
                     className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all hover:shadow-lg hover:-translate-y-0.5"
                 >
                     <Plus className="h-4 w-4 mr-2" />
-                    Add User
+                    Añadir Usuario
                 </button>
             </div>
 
@@ -50,12 +50,12 @@ export default function UsersPage() {
                         <input
                             type="text"
                             className="focus:ring-indigo-500 border focus:border-indigo-500 block w-full pl-10 sm:text-sm border-slate-200 rounded-lg py-2.5 px-3 bg-white"
-                            placeholder="Search by name or email..."
+                            placeholder="Buscar por nombre o correo..."
                         />
                     </div>
                     <button className="inline-flex items-center px-4 py-2.5 border border-slate-200 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none transition-colors">
                         <Filter className="h-4 w-4 mr-2 text-slate-500" />
-                        Filters
+                        Filtros
                     </button>
                 </div>
 
@@ -64,19 +64,19 @@ export default function UsersPage() {
                         <thead className="bg-slate-50/80">
                             <tr>
                                 <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    User
+                                    Usuario
                                 </th>
                                 <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    Contact
+                                    Contacto
                                 </th>
                                 <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    Role
+                                    Rol
                                 </th>
                                 <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    Joined
+                                    Unido
                                 </th>
                                 <th scope="col" className="relative px-6 py-4">
-                                    <span className="sr-only">Actions</span>
+                                    <span className="sr-only">Acciones</span>
                                 </th>
                             </tr>
                         </thead>
@@ -136,7 +136,7 @@ export default function UsersPage() {
             <Modal
                 isOpen={isFormOpen}
                 onClose={() => setIsFormOpen(false)}
-                title={editingUser ? "Edit User Profile" : "Create New User"}
+                title={editingUser ? "Editar Perfil de Usuario" : "Crear Nuevo Usuario"}
             >
                 <UserForm
                     initialData={editingUser || undefined}
@@ -152,7 +152,7 @@ export default function UsersPage() {
             <Modal
                 isOpen={!!userToDelete}
                 onClose={() => setUserToDelete(null)}
-                title="Confirm Deletion"
+                title="Confirmar Eliminación"
                 maxWidth="max-w-md"
             >
                 <div className="pt-2 text-center text-slate-600 mb-6">
@@ -160,7 +160,7 @@ export default function UsersPage() {
                         <ShieldAlert className="h-8 w-8 text-rose-600" aria-hidden="true" />
                     </div>
                     <p>
-                        Are you sure you want to delete the user <strong>{userToDelete?.firstName} {userToDelete?.lastName}</strong>? This action cannot be undone and will permanently remove their access.
+                        ¿Estás seguro de que quieres eliminar al usuario <strong>{userToDelete?.firstName} {userToDelete?.lastName}</strong>? Esta acción no se puede deshacer y revocará su acceso.
                     </p>
                 </div>
                 <div className="flex justify-end gap-3 w-full">
@@ -168,7 +168,7 @@ export default function UsersPage() {
                         onClick={() => setUserToDelete(null)}
                         className="flex-1 rounded-xl border border-slate-300 bg-white py-2.5 px-4 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
                     >
-                        Cancel
+                        Cancelar
                     </button>
                     <button
                         onClick={() => {
@@ -177,7 +177,7 @@ export default function UsersPage() {
                         }}
                         className="flex-1 inline-flex justify-center rounded-xl bg-rose-600 py-2.5 px-4 text-sm font-medium text-white hover:bg-rose-700 transition-colors shadow-sm"
                     >
-                        Yes, Delete User
+                        Sí, Eliminar Usuario
                     </button>
                 </div>
             </Modal>

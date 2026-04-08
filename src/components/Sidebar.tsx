@@ -11,8 +11,8 @@ import {
 import { useModals } from "./ModalsProvider";
 
 const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Tickets", href: "/dashboard/tickets", icon: HelpCircle },
+    { name: "Panel", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Casos/Tickets", href: "/dashboard/tickets", icon: HelpCircle },
     { name: "Chat en Vivo", href: "/dashboard/chat", icon: MessageSquareText },
     { name: "Usuarios", href: "/dashboard/users", icon: Users },
     { name: "Roles y Permisos", href: "/dashboard/roles", icon: Shield },

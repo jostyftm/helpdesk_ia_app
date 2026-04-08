@@ -1,51 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+import { useResetPassword } from "./hooks/useResetPassword";
 
 // Form Component
 function ResetPasswordForm() {
-    const searchParams = useSearchParams();
-    const emailFromUrl = searchParams.get("email") || "";
-    const tokenFromUrl = searchParams.get("token") || "";
-
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const validatePassword = (pass: string) => {
-        if (pass.length < 8) return "Password must be at least 8 characters long.";
-        if (!/[A-Z]/.test(pass)) return "Password must contain at least one uppercase letter.";
-        if (!/[a-z]/.test(pass)) return "Password must contain at least one lowercase letter.";
-        if (!/[0-9]/.test(pass)) return "Password must contain at least one number.";
-        return null;
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setError("");
-
-        const validationError = validatePassword(password);
-        if (validationError) {
-            setError(validationError);
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError("Passwords do not match.");
-            return;
-        }
-
-        if (!emailFromUrl || !tokenFromUrl) {
-            setError("Invalid reset link. Missing vital information.");
-            return;
-        }
-
-        // Simulate successful password reset
-        setIsSuccess(true);
-    };
+    const { form, isLoading, globalError, isSuccess, onSubmit } = useResetPassword();
+    const { register, formState: { errors } } = form;
 
     if (isSuccess) {
         return (
@@ -76,8 +39,8 @@ function ResetPasswordForm() {
     }
 
     return (
-        <form className="space-y-6" onSubmit={handleSubmit}>
-            {error && (
+        <form className="space-y-6" onSubmit={onSubmit}>
+            {globalError && (
                 <div className="rounded-md bg-red-50 p-4 border border-red-200">
                     <div className="flex">
                         <div className="flex-shrink-0">
@@ -86,9 +49,9 @@ function ResetPasswordForm() {
                             </svg>
                         </div>
                         <div className="ml-3">
-                            <h3 className="text-sm font-medium text-red-800">Validation Error</h3>
+                            <h3 className="text-sm font-medium text-red-800">Error</h3>
                             <div className="mt-2 text-sm text-red-700">
-                                <p>{error}</p>
+                                <p>{globalError}</p>
                             </div>
                         </div>
                     </div>
@@ -105,13 +68,19 @@ function ResetPasswordForm() {
                 <div className="mt-1">
                     <input
                         id="email"
-                        name="email"
                         type="email"
-                        disabled
-                        value={emailFromUrl}
+                        readOnly
+                        {...register("email")}
                         className="appearance-none block w-full px-3 py-2.5 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
                         placeholder="Loading email..."
                     />
+                    <input type="hidden" {...register("token")} />
+                    {errors.email && (
+                        <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                    {errors.token && (
+                        <p className="mt-2 text-sm text-red-600">{errors.token.message}</p>
+                    )}
                 </div>
             </div>
 
@@ -125,18 +94,19 @@ function ResetPasswordForm() {
                 <div className="mt-1">
                     <input
                         id="password"
-                        name="password"
                         type="password"
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all duration-200"
+                        {...register("password")}
+                        className={`appearance-none block w-full px-3 py-2.5 border ${errors.password ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'} rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-all duration-200`}
                         placeholder="••••••••"
                     />
                 </div>
-                <p className="mt-2 text-xs text-gray-500">
-                    Must be at least 8 characters, with 1 uppercase, 1 lowercase, and 1 number.
-                </p>
+                {errors.password ? (
+                    <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
+                ) : (
+                    <p className="mt-2 text-xs text-gray-500">
+                        Must be at least 8 characters, with 1 uppercase, 1 lowercase, and 1 number.
+                    </p>
+                )}
             </div>
 
             <div>
@@ -149,23 +119,24 @@ function ResetPasswordForm() {
                 <div className="mt-1">
                     <input
                         id="confirmPassword"
-                        name="confirmPassword"
                         type="password"
-                        required
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all duration-200"
+                        {...register("password_confirmation")}
+                        className={`appearance-none block w-full px-3 py-2.5 border ${errors.password_confirmation ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'} rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-all duration-200`}
                         placeholder="••••••••"
                     />
                 </div>
+                {errors.password_confirmation && (
+                    <p className="mt-2 text-sm text-red-600">{errors.password_confirmation.message}</p>
+                )}
             </div>
 
             <div>
                 <button
                     type="submit"
-                    className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md"
+                    disabled={isLoading}
+                    className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                    Update Password
+                    {isLoading ? "Updating..." : "Update Password"}
                 </button>
             </div>
 
