@@ -60,9 +60,21 @@ export const useLogin = () => {
                 setGlobalError('Missing access token in response');
             }
         } catch (error: any) {
-            setGlobalError(
-                error.response?.data?.message || 'Credenciales inválidas o ha ocurrido un error.'
-            );
+            const response = error.response;
+            if (response?.status === 422 && response?.data?.errors) {
+                const errors = response.data.errors;
+                Object.keys(errors).forEach((key) => {
+                    form.setError(key as keyof LoginFormValues, {
+                        type: 'server',
+                        message: Array.isArray(errors[key]) ? errors[key][0] : errors[key]
+                    });
+                });
+                setGlobalError(response.data.message || 'Error de validación');
+            } else {
+                setGlobalError(
+                    response?.data?.message || 'Credenciales inválidas o ha ocurrido un error.'
+                );
+            }
         } finally {
             setIsLoading(false);
         }
