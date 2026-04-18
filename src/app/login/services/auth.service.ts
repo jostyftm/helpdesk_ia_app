@@ -28,3 +28,10 @@ export const checkSession = async (): Promise<any> => {
         method: "POST"
     })
 }
+
+export const getMe = async (): Promise<any> => {
+    return await httpRequest({
+        url: "/api/v1/auth/me",
+        method: "GET"
+    })
+}

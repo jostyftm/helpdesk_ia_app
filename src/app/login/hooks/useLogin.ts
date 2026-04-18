@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCsrfCookie, login } from '../services/auth.service';
+import { getCsrfCookie, login, getMe } from '../services/auth.service';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -54,6 +54,21 @@ export const useLogin = () => {
 
             if (token) {
                 localStorage.setItem('access_token', token);
+                
+                // 3. Fetch user details and store them
+                try {
+                    const meResponse = await getMe();
+                    const userData = meResponse.data;
+                    if (userData && userData.id !== undefined) {
+                        localStorage.setItem('user', JSON.stringify(userData));
+                        localStorage.setItem('user_id', userData.id.toString());
+                    }
+                } catch (meError) {
+                    console.error("Failed to fetch user data after login:", meError);
+                    // Decide whether to fail the login entirely or just proceed without user info. 
+                    // Usually we proceed or clear everything. For now we proceed so we don't break the flow.
+                }
+
                 // document.cookie = `access_token=${token}; path=/; max-age=86400`;
                 router.push('/dashboard/tickets');
             } else {

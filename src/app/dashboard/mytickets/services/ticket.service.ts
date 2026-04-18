@@ -14,6 +14,7 @@ export interface TicketQueryParams {
         ticket_source_id?: string;
         state_id?: string;
         start_after?: string; // yyyy-mm-dd or yyyy-mm-dd,yyyy-mm-dd
+        user_id?: string;
     };
 }
 

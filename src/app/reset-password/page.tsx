@@ -20,16 +20,16 @@ function ResetPasswordForm() {
                         </svg>
                     </div>
                     <div className="ml-3">
-                        <h3 className="text-sm font-medium text-green-800">Password reset complete</h3>
+                        <h3 className="text-sm font-medium text-green-800">Restablecimiento de contraseña completo</h3>
                         <div className="mt-2 text-sm text-green-700">
-                            <p>Your password has been successfully updated. You can now log in with your new password.</p>
+                            <p>Tu contraseña ha sido actualizada exitosamente. Ahora puedes iniciar sesión con tu nueva contraseña.</p>
                         </div>
                         <div className="mt-4">
                             <Link
                                 href="/login"
                                 className="rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50 transition-colors"
                             >
-                                Continue to login
+                                Continuar a inicio de sesión
                             </Link>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ function ResetPasswordForm() {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                 >
-                    Email address
+                    Correo electrónico
                 </label>
                 <div className="mt-1">
                     <input
@@ -72,7 +72,7 @@ function ResetPasswordForm() {
                         readOnly
                         {...register("email")}
                         className="appearance-none block w-full px-3 py-2.5 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
-                        placeholder="Loading email..."
+                        placeholder="Cargando correo electrónico..."
                     />
                     <input type="hidden" {...register("token")} />
                     {errors.email && (
@@ -89,7 +89,7 @@ function ResetPasswordForm() {
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700"
                 >
-                    New Password
+                    Nueva Contraseña
                 </label>
                 <div className="mt-1">
                     <input
@@ -104,7 +104,7 @@ function ResetPasswordForm() {
                     <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
                 ) : (
                     <p className="mt-2 text-xs text-gray-500">
-                        Must be at least 8 characters, with 1 uppercase, 1 lowercase, and 1 number.
+                        Debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número.
                     </p>
                 )}
             </div>
@@ -114,7 +114,7 @@ function ResetPasswordForm() {
                     htmlFor="confirmPassword"
                     className="block text-sm font-medium text-gray-700"
                 >
-                    Confirm Password
+                    Confirmar Contraseña
                 </label>
                 <div className="mt-1">
                     <input
@@ -136,7 +136,7 @@ function ResetPasswordForm() {
                     disabled={isLoading}
                     className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                    {isLoading ? "Updating..." : "Update Password"}
+                    {isLoading ? "Actualizando..." : "Actualizar Contraseña"}
                 </button>
             </div>
 
@@ -145,7 +145,7 @@ function ResetPasswordForm() {
                     href="/login"
                     className="text-sm font-medium text-gray-600 hover:text-blue-500 transition-colors"
                 >
-                    Cancel and return to login
+                    Cancelar y volver al inicio de sesión
                 </Link>
             </div>
         </form>
@@ -163,10 +163,10 @@ export default function ResetPasswordPage() {
                     </div>
                 </div>
                 <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
-                    Update your password
+                    Actualiza tu contraseña
                 </h2>
                 <p className="mt-2 text-center text-sm text-gray-600">
-                    Create a new secure password for your account.
+                    Crea una nueva contraseña segura para tu cuenta.
                 </p>
             </div>
 

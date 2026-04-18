@@ -17,11 +17,11 @@ export default function PasswordRecoveryPage() {
                     </div>
                 </div>
                 <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
-                    Reset your password
+                    Restablece tu contraseña
                 </h2>
                 <p className="mt-2 text-center text-sm text-gray-600">
-                    Enter your email address and we will send you a link to reset your
-                    password.
+                    Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu
+                    contraseña.
                 </p>
             </div>
 
@@ -36,9 +36,9 @@ export default function PasswordRecoveryPage() {
                                     </svg>
                                 </div>
                                 <div className="ml-3">
-                                    <h3 className="text-sm font-medium text-green-800">Email sent successfully</h3>
+                                    <h3 className="text-sm font-medium text-green-800">Correo enviado exitosamente</h3>
                                     <div className="mt-2 text-sm text-green-700">
-                                        <p>We've sent a password reset link to <strong>{emailStr || "your email address"}</strong>. Please check your inbox.</p>
+                                        <p>Hemos enviado un enlace para restablecer tu contraseña a <strong>{emailStr || "tu correo electrónico"}</strong>. Por favor revisa tu bandeja de entrada.</p>
                                     </div>
                                     <div className="mt-4">
                                         <div className="-mx-2 -my-1.5 flex">
@@ -47,7 +47,7 @@ export default function PasswordRecoveryPage() {
                                                 onClick={resetSentState}
                                                 className="rounded-md bg-green-50 px-2 py-1.5 text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50 transition-colors"
                                             >
-                                                Send another link
+                                                Enviar otro enlace
                                             </button>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ export default function PasswordRecoveryPage() {
                                     htmlFor="email"
                                     className="block text-sm font-medium text-gray-700"
                                 >
-                                    Email address
+                                    Correo electrónico
                                 </label>
                                 <div className="mt-1">
                                     <input
@@ -89,7 +89,7 @@ export default function PasswordRecoveryPage() {
                                     disabled={isLoading}
                                     className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    {isLoading ? "Sending..." : "Send reset link"}
+                                    {isLoading ? "Enviando..." : "Enviar enlace de recuperación"}
                                 </button>
                             </div>
                         </form>
@@ -103,7 +103,7 @@ export default function PasswordRecoveryPage() {
                                 </div>
                                 <div className="relative flex justify-center text-sm">
                                     <span className="px-2 bg-white text-gray-500">
-                                        Remembered your password?
+                                        ¿Recordaste tu contraseña?
                                     </span>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@ export default function PasswordRecoveryPage() {
                             href="/login"
                             className="w-full flex justify-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
                         >
-                            Return to login
+                            Volver al inicio de sesión
                         </Link>
                     </div>
                 </div>

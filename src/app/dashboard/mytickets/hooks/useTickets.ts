@@ -19,7 +19,8 @@ export const useTickets = () => {
         ticket_priority_id: '',
         ticket_source_id: '',
         state_id: '',
-        start_after: ''
+        start_after: '',
+        user_id: typeof window !== 'undefined' ? (localStorage.getItem('user_id') || '1') : '1'
     });
 
     // Debounce textual filters
@@ -50,7 +51,7 @@ export const useTickets = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [page, sort, debouncedId, debouncedSubject, debouncedDescription, filters?.ticket_category_id, filters?.ticket_priority_id, filters?.ticket_source_id, filters?.state_id, filters?.start_after]);
+    }, [page, sort, debouncedId, debouncedSubject, debouncedDescription, filters?.ticket_category_id, filters?.ticket_priority_id, filters?.ticket_source_id, filters?.state_id, filters?.start_after, filters?.user_id]);
 
     useEffect(() => {
         fetchTicketsData();

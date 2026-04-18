@@ -20,10 +20,10 @@ export default function LoginPage() {
                             <span className="text-xl font-bold text-gray-900 tracking-tight">HelpDesk IA</span>
                         </div>
                         <h2 className="mt-8 text-3xl font-extrabold text-gray-900 tracking-tight">
-                            Welcome back
+                            Bienvenido de nuevo
                         </h2>
                         <p className="mt-2 text-sm text-gray-600">
-                            Please enter your details to sign in
+                            Por favor ingresa tus datos para iniciar sesión
                         </p>
                     </div>
 
@@ -39,7 +39,7 @@ export default function LoginPage() {
                                     htmlFor="email"
                                     className="block text-sm font-medium text-gray-700"
                                 >
-                                    Email address
+                                    Correo electrónico
                                 </label>
                                 <div className="mt-1">
                                     <input
@@ -61,7 +61,7 @@ export default function LoginPage() {
                                     htmlFor="password"
                                     className="block text-sm font-medium text-gray-700"
                                 >
-                                    Password
+                                    Contraseña
                                 </label>
                                 <div className="mt-1">
                                     <input
@@ -90,7 +90,7 @@ export default function LoginPage() {
                                         htmlFor="remember-me"
                                         className="ml-2 block text-sm text-gray-700 hover:text-gray-900 cursor-pointer transition-colors"
                                     >
-                                        Remember me
+                                        Recordarme
                                     </label>
                                 </div>
 
@@ -99,7 +99,7 @@ export default function LoginPage() {
                                         href="/recovery"
                                         className="font-semibold text-blue-600 hover:text-blue-500 transition-colors"
                                     >
-                                        Forgot password?
+                                        ¿Olvidaste tu contraseña?
                                     </Link>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@ export default function LoginPage() {
                                     disabled={isLoading}
                                     className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    {isLoading ? "Signing in..." : "Sign in"}
+                                    {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
                                 </button>
                             </div>
                         </form>
@@ -143,10 +143,10 @@ export default function LoginPage() {
                             </svg>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                            Empower your support team
+                            Potencia a tu equipo de soporte
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
-                            Streamline your workflow with AI-powered ticket resolution, smart categorizations, and detailed analytics.
+                            Optimiza tu flujo de trabajo con resolución de tickets mediante IA, categorización inteligente y análisis detallados.
                         </p>
                     </div>
                 </div>

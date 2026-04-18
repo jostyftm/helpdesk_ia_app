@@ -4,27 +4,42 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-    Users, FileText, Settings, HelpCircle, LogOut,
-    LayoutDashboard, MessageSquareText, Shield, User, Key,
+    LogOut, User, Key,
     HeadphonesIcon, MoreVertical
 } from "lucide-react";
-import { useModals } from "./ModalsProvider";
 
-const navigation = [
-    { name: "Panel", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Casos/Tickets", href: "/dashboard/tickets", icon: HelpCircle },
-    { name: "Chat en Vivo", href: "/dashboard/chat", icon: MessageSquareText },
-    { name: "Usuarios", href: "/dashboard/users", icon: Users },
-    { name: "Roles y Permisos", href: "/dashboard/roles", icon: Shield },
-    { name: "Reportes", href: "/dashboard/reports", icon: FileText },
-    { name: "Configuración", href: "/dashboard/settings", icon: Settings },
-];
+import * as LucideIcons from "lucide-react";
+import { useModals } from "./ModalsProvider";
+import { useNavigation } from "@/hooks/useNavigation";
+
+const DynamicIcon = ({ name, className, "aria-hidden": ariaHidden }: { name: string, className?: string, "aria-hidden"?: string | boolean }) => {
+    const IconComponent = (LucideIcons as any)[name] || LucideIcons.Circle;
+    return <IconComponent className={className} aria-hidden={ariaHidden} />;
+};
 
 export function Sidebar({ isCollapsed }: { isCollapsed: boolean }) {
     const pathname = usePathname();
     const { openChangePasswordModal, openUpdateProfileModal, openLogoutModal } = useModals();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const { modules, isLoading } = useNavigation();
+    const [userProfile, setUserProfile] = useState<any>(null);
+
+    const sidebarModules = modules.filter(m => m.attributes.show_sidebar);
+
+    // Load user profile from localStorage
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem('user');
+            if (stored) {
+                try {
+                    setUserProfile(JSON.parse(stored));
+                } catch (e) {
+                    console.error("Error parsing user profile", e);
+                }
+            }
+        }
+    }, []);
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -54,29 +69,36 @@ export function Sidebar({ isCollapsed }: { isCollapsed: boolean }) {
 
             <div className="flex flex-1 flex-col overflow-y-auto custom-scrollbar overflow-x-hidden pt-4 pb-4">
                 <nav className="flex-1 space-y-1.5 px-3">
-                    {navigation.map((item) => {
-                        const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname?.startsWith(item.href));
+                    {isLoading ? (
+                        <div className="flex justify-center items-center py-10">
+                            <LucideIcons.Loader2 className="w-6 h-6 animate-spin text-indigo-500" />
+                        </div>
+                    ) : sidebarModules.map((item) => {
+                        const href = item.attributes.path;
+                        const name = item.attributes.name;
+                        const isActive = pathname === href || (href !== "/dashboard" && pathname?.startsWith(href));
                         return (
-                            <div key={item.name} className="relative group flex">
+                            <div key={name} className="relative group flex">
                                 <Link
-                                    href={item.href}
+                                    href={href}
                                     className={`flex items-center py-3 text-sm font-medium rounded-xl transition-all duration-200 w-full ${isActive
                                         ? "bg-[#28293d] text-white shadow-sm"
                                         : "text-slate-400 hover:bg-[#28293d]/50 hover:text-slate-200"
                                         } ${isCollapsed ? 'justify-center px-0' : 'px-4'}`}
                                 >
-                                    <item.icon
+                                    <DynamicIcon
+                                        name={item.attributes.icon}
                                         className={`h-5 w-5 flex-shrink-0 transition-colors ${isActive ? "text-indigo-400" : "text-slate-400 group-hover:text-slate-300"
                                             } ${!isCollapsed ? 'mr-3' : ''}`}
                                         aria-hidden="true"
                                     />
-                                    {!isCollapsed && <span className="truncate">{item.name}</span>}
+                                    {!isCollapsed && <span className="truncate">{name}</span>}
                                 </Link>
 
                                 {/* Tooltip for collapsed state */}
                                 {isCollapsed && (
                                     <div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-3 py-2 bg-slate-800 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity shadow-xl">
-                                        {item.name}
+                                        {name}
                                         <div className="absolute top-1/2 -left-1 -translate-y-1/2 border-y-4 border-y-transparent border-r-4 border-r-slate-800"></div>
                                     </div>
                                 )}
@@ -91,14 +113,18 @@ export function Sidebar({ isCollapsed }: { isCollapsed: boolean }) {
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             className={`w-full flex items-center py-2 rounded-xl text-slate-400 hover:bg-[#28293d] transition-all duration-200 ${isCollapsed ? 'justify-center px-0' : 'px-3 justify-between'}`}
                         >
-                            <div className="flex items-center">
-                                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0">
-                                    AU
+                            <div className="flex items-center overflow-hidden">
+                                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-xs shrink-0 uppercase">
+                                    {userProfile ? `${userProfile.attributes.name?.charAt(0) || ''}${userProfile.attributes.last_name?.charAt(0) || ''}` : 'AU'}
                                 </div>
                                 {!isCollapsed && (
-                                    <div className="ml-3 text-left">
-                                        <p className="text-sm font-medium text-slate-200 max-w-[120px] truncate">Admin Usuario</p>
-                                        <p className="text-xs text-slate-500 max-w-[120px] truncate">admin@helpdesk.com</p>
+                                    <div className="ml-3 text-left overflow-hidden">
+                                        <p className="text-sm font-medium text-slate-200 max-w-[140px] truncate" title={userProfile ? `${userProfile.attributes.name} ${userProfile.attributes.last_name}` : 'Admin Usuario'}>
+                                            {userProfile ? `${userProfile.attributes.name} ${userProfile.attributes.last_name}` : 'Admin Usuario'}
+                                        </p>
+                                        <p className="text-xs text-slate-500 max-w-[140px] truncate" title={userProfile?.attributes.email || 'admin@helpdesk.com'}>
+                                            {userProfile?.attributes.email || 'admin@helpdesk.com'}
+                                        </p>
                                     </div>
                                 )}
                             </div>
